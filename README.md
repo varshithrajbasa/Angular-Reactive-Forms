@@ -9,6 +9,6 @@ A Reactive based approach form control.
       this.customValidator.bind(this), // custom Validator
     ]),
 
-## angular-ivy-spdomn
+## StackBlitz
 
 [Edit on StackBlitz ⚡️](https://stackblitz.com/edit/angular-ivy-spdomn)
