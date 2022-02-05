@@ -1,0 +1,82 @@
+<div class="m-2">
+  <form [formGroup]="signUpForm" (submit)="submitForm()">
+    <div formGroupName="userData">
+      <div class="mb-3 row">
+        <label for="username" class="col-sm-3 col-form-label">User Name</label>
+        <div class="col-sm-9">
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            formControlName="username"
+            required
+          />
+        </div>
+        <span
+          *ngIf="
+            !signUpForm.get('userData.username').valid &&
+            signUpForm.get('userData.username').touched
+          "
+          class="err-msg"
+          >Please enter a valid username</span
+        >
+      </div>
+      <div class="mb-3 row">
+        <label for="inputEmail" class="col-sm-3 col-form-label">Email</label>
+        <div class="col-sm-9">
+          <input
+            type="email"
+            class="form-control"
+            id="inputEmail"
+            formControlName="email"
+          />
+        </div>
+        <span
+          *ngIf="
+            !signUpForm.get('userData.email').valid &&
+            signUpForm.get('userData.email').touched
+          "
+          class="err-msg"
+          >Please enter a valid email</span
+        >
+      </div>
+    </div>
+    <div class="mb-3 row">
+      <label class="col-sm-3 col-form-label">Gender</label>
+      <div>
+        <div class="col-sm-9 form-check" *ngFor="let gender of genders">
+          <input
+            type="radio"
+            class="form-check-input"
+            formControlName="gender"
+            [value]="gender"
+            [id]="gender"
+            required
+          />
+          <label class="form-check-label" [for]="gender">{{ gender }}</label>
+        </div>
+      </div>
+    </div>
+    <div formArrayName="hobbies">
+      <h4>Your Hobbies</h4>
+      <button class="btn btn-secondary" type="button"
+      (click)="onAddHobby()">Add Hobby</button>
+      <div class="form-group" *ngFor="let hobbyControl of signUpForm.get('hobbies')['controls'];let i = index">
+        <input type="text" class="form-control mt-2" [formControlName]="i">
+      </div>
+    </div>
+    <span *ngIf="!signUpForm.valid && signUpForm.touched" class="err-msg"
+      >Please enter valid data</span
+    >
+    <div class="d-flex mt-2">
+      <button class="btn btn-primary me-2" type="submit" [disabled]="">
+        Submit
+      </button>
+      <button class="btn btn-primary me-2" (click)="setDefault($event)">
+        Set Default values
+      </button>
+      <button class="btn btn-primary me-2" type="reset">Reset</button>
+    </div>
+  </form>
+  
+</div>
